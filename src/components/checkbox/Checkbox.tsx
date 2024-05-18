@@ -14,7 +14,15 @@ interface CheckboxProps
 
 export const Checkbox = forwardRef(
 	(props: CheckboxProps, ref?: Ref<HTMLInputElement>) => {
-		const { children, name, value, checked, onChange, ...restProps } = props
+		const {
+			children,
+			className,
+			name,
+			value,
+			checked,
+			onChange,
+			...restProps
+		} = props
 		const context = useContext(CheckboxContext)
 
 		const id = useId()
@@ -29,7 +37,7 @@ export const Checkbox = forwardRef(
 		}
 
 		return (
-			<div>
+			<label htmlFor={id} className={className}>
 				<input
 					{...restProps}
 					ref={ref}
@@ -40,8 +48,8 @@ export const Checkbox = forwardRef(
 					checked={checked ?? context?.selected.includes(value)}
 					onChange={handleChange}
 				/>
-				<label htmlFor={id}>{children}</label>
-			</div>
+				{children}
+			</label>
 		)
 	}
 )
